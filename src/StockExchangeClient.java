@@ -6,12 +6,13 @@ import java.util.Scanner;
 
 public class StockExchangeClient {
     public static void startExchange() throws FileNotFoundException, ParseException {
-        Scanner scanner = new Scanner(new File("./input/input2.txt"));
+        Scanner scanner = new Scanner(new File("./input/input1.txt"));
         StockExchange stockExchange = StockExchange.getStockExchange();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            String[] inputArray = input.split(" ");
+            input = input.replace("  ", " ");
+            String[] inputArray = input.trim().split(" ");
             String orderId = inputArray[0];
             // Storing time string as Day Epoch Time Long
             Long time = sdf.parse(inputArray[1]).getTime();

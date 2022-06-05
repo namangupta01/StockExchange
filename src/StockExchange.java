@@ -122,7 +122,7 @@ public class StockExchange {
         }
         if(buyOrder.getPendingQuantity() > 0) addOrderToStockToOrdersMap(buyOrder);
         for (Transaction transaction : transactionsList) {
-            System.out.println(transaction.getBuyOrder().getOrderId() + " " + transaction.getPrice() + " " + transaction.getQuantity() + " " + transaction.getSellOrder().getOrderId());
+            System.out.println(transaction.getBuyOrder().getOrderId() + " " + String.format("%.2f", transaction.getPrice()) + " " + transaction.getQuantity() + " " + transaction.getSellOrder().getOrderId());
         }
         transactions.addAll(transactionsList);
     }
@@ -156,7 +156,7 @@ public class StockExchange {
                     sellOrder.setPendingQuantity(0);
                     break;
                 } else {
-                    transactionsList.add(new Transaction(buyOrder, sellOrder, sellOrder.getPendingQuantity(), sellOrder.getPrice(), buyOrder.getStock()));
+                    transactionsList.add(new Transaction(buyOrder, sellOrder, buyOrder.getPendingQuantity(), sellOrder.getPrice(), buyOrder.getStock()));
                     buyOrder.setPendingQuantity(0);
                     sellOrder.setPendingQuantity(-(quantityDelta));
                     buyOrders.remove(buyOrder);
@@ -168,7 +168,7 @@ public class StockExchange {
         }
         if(sellOrder.getPendingQuantity() > 0) addOrderToStockToOrdersMap(sellOrder);
         for (Transaction transaction : transactionsList) {
-            System.out.println(transaction.getBuyOrder().getOrderId() + " " + transaction.getPrice() + " " + transaction.getQuantity() + " " + transaction.getSellOrder().getOrderId());
+            System.out.println(transaction.getBuyOrder().getOrderId() + " " + String.format("%.2f", transaction.getPrice()) + " " + transaction.getQuantity() + " " + transaction.getSellOrder().getOrderId());
         }
         transactions.addAll(transactionsList);
     }
